@@ -135,20 +135,33 @@ public class SQLDBModel {
 				
 				String insertQuery = "INSERT INTO " + PARTS_DATABASE + "." + NOSE_CONES_TABLE;
 				
+				/*
+				// Must use weird symbol on tilde key for columnNames.
+				String columnNames = " (";
 				
-					
+				for (int index = 0; index < model.size() - 1; index++) {
+					columnNames = columnNames + "`" + model.get(index).getSqlDBColName().toString() + "`" + ", ";
+				}
+				
+				columnNames = columnNames + "`" + model.get(model.size() - 1).getSqlDBColName() + "`" + ")";
+				*/
+
+				// Must use apostrophe for values.
 				String queryValues = " VALUES(";
 				
 				for (int index = 0; index < model.size() - 1; index++) {
-					queryValues = queryValues + "`" + model.get(index).getSqlDBColValue().toString() + "`" + ", ";
+					queryValues = queryValues + "'" + model.get(index).getSqlDBColValue().toString() + "'" + ", ";
 				}
 				
-				queryValues = queryValues + "`" + model.get(model.size() - 1).getSqlDBColValue().toString() + "`" + ")";
+				queryValues = queryValues + "'" + model.get(model.size() - 1).getSqlDBColValue().toString() + "'" + ")";
+				// insertQuery = insertQuery + columnNames + queryValues;
+				
 				insertQuery = insertQuery + queryValues;
 				
 				System.out.println(insertQuery);
 				
-				statement.executeQuery(insertQuery);
+				// Must call executeUpdate for insert
+				statement.executeUpdate(insertQuery);
 				added = true;
 				disconnect();
 			}
