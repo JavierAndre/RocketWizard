@@ -52,7 +52,7 @@ public class SQLDBModel {
 	public static final String	NOSE_CONE_MATERIAL_ID 				= "MATERIAL_ID";
 	public static final String	NOSE_CONE_DATE_ADDED 				= "DATE_ADDED";
 	public static final String	NOSE_CONE_DATE_LAST_UPDATED 		= "DATE_LAST_UPDATED";
-	public static final String	NOSE_CONE_DATE_ACTIVE 				= "ACTIVE";
+	public static final String	NOSE_CONE_ACTIVE 					= "ACTIVE";
 	
 	/*
 	 * Constructors
@@ -123,6 +123,83 @@ public class SQLDBModel {
 	 * Generic CRUD Operations
 	 * 
 	 */
+	
+	public boolean add(String tableName, List<SQLDBColModel> model) {
+		
+		boolean added = false;
+		
+		if (connect()) {
+
+			try {
+				statement = connection.createStatement();
+				
+				String insertQuery = "INSERT INTO " + PARTS_DATABASE + "." + NOSE_CONES_TABLE;
+				
+				
+					
+				String queryValues = " VALUES(";
+				
+				for (int index = 0; index < model.size() - 1; index++) {
+					queryValues = queryValues + "`" + model.get(index).getSqlDBColValue().toString() + "`" + ", ";
+				}
+				
+				queryValues = queryValues + "`" + model.get(model.size() - 1).getSqlDBColValue().toString() + "`" + ")";
+				insertQuery = insertQuery + queryValues;
+				
+				System.out.println(insertQuery);
+				
+				statement.executeQuery(insertQuery);
+				added = true;
+				disconnect();
+			}
+			catch (SQLException e) {
+				System.out.println("SQLDatabase::addNoseCone(): MySQL INSERT INTO " + tableName + " table failed.");
+				disconnect();
+			}
+		}
+		
+		return added;
+	}
+	
+	public boolean addNoseCone(String tableName, NoseConeModel model) {
+		
+		boolean added = false;
+		
+		if (connect()) {
+
+			try {
+				statement = connection.createStatement();
+				
+				String selectQuery = "INSERT INTO " + PARTS_DATABASE + "." + NOSE_CONES_TABLE + " VALUES(" + 
+																											model.getManufacturerID() + 
+									 																		model.getPartNumber() +
+									 																		model.getModelName() + 
+									 																		model.getInnerDiameterEnglish() + 
+									 																		model.getOuterDiameterEnglish() + 
+									 																		model.getNoseLengthEnglish() + 
+									 																		model.getShoulderLengthEnglish() + 
+									 																		model.getWeightEnglish() + 
+									 																		model.getInnerDiameterMetric() + 
+									 																		model.getOuterDiameterMetric() + 
+									 																		model.getNoseLengthMetric() + 
+									 																		model.getShoulderLengthMetric() + 
+									 																		model.getWeightEnglish() + 
+									 																		model.getMaterialID() + 
+									 																		model.getDateAdded() + 
+									 																		model.getDateLastUpdated() + 
+									 																		model.isActive() + ")";
+				statement.executeQuery(selectQuery);
+				added = true;
+				disconnect();
+			}
+			catch (SQLException e) {
+				System.out.println("SQLDatabase::addNoseCone(): MySQL INSERT INTO " + tableName + " failed. ManufacturerID: " + model.getManufacturerID() + " Part Number: " + model.getPartNumber() + " Model Name: " + model.getModelName());
+				disconnect();
+			}
+		}
+		
+		return added;
+	}
 	
 	public List<Object> get(String tableName) {
 		

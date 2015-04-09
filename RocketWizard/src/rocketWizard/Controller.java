@@ -39,6 +39,11 @@ public class Controller {
 	 * 
 	 */
 	
+	public boolean addNoseCone(List<SQLDBColModel> model) {
+		
+		return sqlDBModel.add(SQLDBModel.NOSE_CONES_TABLE, model);
+	}
+	
 	public LinkedList<NoseConeModel> getNoseCones() {
 		
 		LinkedList<NoseConeModel> noseConeList 	= new LinkedList<NoseConeModel>();

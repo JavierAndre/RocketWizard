@@ -279,7 +279,7 @@ public class NoseConeModel {
 					dateLastUpdated = (Date)list.get(index).getSqlDBColValue();
 					break;
 				}
-				case SQLDBModel.NOSE_CONE_DATE_ACTIVE: {
+				case SQLDBModel.NOSE_CONE_ACTIVE: {
 					active = (boolean)list.get(index).getSqlDBColValue();
 					break;
 				}
