@@ -121,45 +121,8 @@ public class TestDatabase {
 		model.setDateAdded(new Date(Calendar.getInstance().getTimeInMillis()));
 		model.setDateLastUpdated(new Date(Calendar.getInstance().getTimeInMillis()));
 		model.setActive(true);
-
-		List<SQLDBColModel> list = new LinkedList<SQLDBColModel>();
 		
-		SQLDBColModel colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_MANUFACTURER_ID, model.getManufacturerID());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_PART_NUMBER, model.getPartNumber());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_MODEL_NAME, model.getModelName());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_INNER_DIAMETER_ENGLISH, model.getInnerDiameterEnglish());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_OUTER_DIAMETER_ENGLISH, model.getOuterDiameterEnglish());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_NOSE_LENGTH_ENGLISH, model.getNoseLengthEnglish());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_SHOULDER_LENGTH_ENGLISH, model.getShoulderLengthEnglish());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_WEIGHT_ENGLISH, model.getWeightEnglish());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_INNER_DIAMETER_METRIC, model.getInnerDiameterMetric());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_OUTER_DIAMETER_METRIC, model.getOuterDiameterMetric());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_NOSE_LENGTH_METRIC, model.getNoseLengthMetric());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_SHOULDER_LENGTH_METRIC, model.getShoulderLengthMetric());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_WEIGHT_METRIC, model.getWeightMetric());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_MATERIAL_ID, model.getMaterialID());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_DATE_ADDED, model.getDateAdded());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_DATE_LAST_UPDATED, model.getDateLastUpdated());
-		list.add(colModel);
-		colModel = new SQLDBColModel(SQLDBModel.NOSE_CONE_ACTIVE, (model.isActive()? 1 : 0));
-		list.add(colModel);
-		
-		if (controller.addNoseCone(list)) {
+		if (controller.addNoseCone(model)) {
 			System.out.println("\nNose Cone " + model.getModelName() + " added." + "\n");
 		}
 		else {
